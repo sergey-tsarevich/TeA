@@ -1,7 +1,11 @@
 package org.tea;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
+import java.io.File;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,10 +29,10 @@ public class WordFrequencyFromTextTest {
 
     @Test
     public void streamsSolution() {
-        Stream<String> stream = Stream.of(text.toLowerCase().split("\\W+")).sequential();
+        Stream<String> stream = Stream.of(text.toLowerCase().split("\\W+"));
                 //.parallel();
 
-        Map<String, Long> wordFreq = stream.collect(Collectors.groupingBy(String::toString, Collectors.counting()))
+        Map<String, Long> wordFreq = stream.collect(Collectors.groupingBy(x -> x, Collectors.counting()))
                 .entrySet()
                 .stream()
                 .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
@@ -60,6 +64,26 @@ public class WordFrequencyFromTextTest {
                 .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
                 .limit(3).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         assertText(resultMap);
+    }
+
+    @Test
+    public void arraysStream() {
+        String[] words = text.toLowerCase().split("\\W+");
+        Map<String, Long> result = Arrays.stream(words)
+                .collect(Collectors.groupingBy(x -> x, Collectors.counting()));
+
+        assertText(result);
+    }
+
+
+    @Test
+    public void arraysStreamRU() throws Exception{
+        System.out.println(Paths.get(".").toAbsolutePath());
+//        byte[] encoded = Files.readAllBytes(Paths.get("texts/tut.by.txt"));
+//        System.out.println(new String(encoded, StandardCharsets.UTF_8));
+        String s = FileUtils.readFileToString(new File("src/test/tut.by.txt"));
+
+        System.out.println(s);
     }
 
 }
