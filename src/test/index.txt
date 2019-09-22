@@ -1,0 +1,5 @@
+file,url,desc
+most-parents-never-check-their-childrens-devices.txt,https://www.zdnet.com/article/most-parents-never-check-their-childrens-devices/?fbclid=IwAR2ZbQKrs2G1hKan3aIc9uHlocM6rFDx-VN5shAqwH3NqNAHpwR6edNdO6w
+not_good.txt,https://www.eff.org/deeplinks/2018/12/dear-tumblr-banning-adult-content-wont-make-your-site-better-it-will-harm-sex
+art-muz.txt,https://habr.com/ru/company/dataart/blog/463023/
+film_chats.txt,https://storage.googleapis.com/dialog-data-corpus/CCPE-M-2019/data.json,https://storage.googleapis.com/dialog-data-corpus/CCPE-M-2019/README.txt|https://ai.google/tools/datasets/coached-conversational-preference-elicitation

@@ -1,16 +1,16 @@
 package org.tea;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Before;
 import org.junit.Test;
+import org.tea.en.WordUtils;
 
 import java.io.File;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -19,27 +19,22 @@ import static junit.framework.TestCase.assertEquals;
  */
 public class WordFrequencyFromTextTest {
 
-    static String text = "Welcome to the world of Geeks \n" +
-            "This portal has been created to provide well written well thought and well explained \n" +
-            "solutions for selected questions If you like Geeks for Geeks and would like to contribute \n" +
-            "here is your chance You can write article and mail your article to contribute at \n" +
-            "geeksforgeeks org See your article appearing on the Geeks for Geeks main page and help \n" +
-            "thousands of other Geeks";
+    private String text = "";
 
+    @Before
+    public void setUp() throws Exception {
+        text = FileUtils.readFileToString(new File("src/test/en/small_test_EN.txt"));
+    }
 
     @Test
-    public void streamsSolution() {
-        Stream<String> stream = Stream.of(text.toLowerCase().split("\\W+"));
-                //.parallel();
+    public void streamsSolution() { //~ 2ms
+        Map<String, Long> wordFreq = WordUtils.computeWordsFrequency(text);
+        assertText(wordFreq);
+    }
 
-        Map<String, Long> wordFreq = stream.collect(Collectors.groupingBy(x -> x, Collectors.counting()))
-                .entrySet()
-                .stream()
-                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
-                .limit(3)
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        Map.Entry::getValue));
+    @Test
+    public void streamsSolutionOrdered() { //~ 2ms
+        Map<String, Long> wordFreq = WordUtils.computeWordsFrequencyOrdered(text);
         assertText(wordFreq);
     }
 
@@ -50,7 +45,7 @@ public class WordFrequencyFromTextTest {
     }
 
     @Test
-    public void mapSolution() {
+    public void mapSolution() { //~ 7ms
         Map<String, Long> map = new HashMap<>();
         String[] words = text.toLowerCase().split("\\W+");
         for (String w : words) {
@@ -67,7 +62,22 @@ public class WordFrequencyFromTextTest {
     }
 
     @Test
-    public void arraysStream() {
+    public void mapSolution2() { //~ 11ms
+        Map<String, Long> map = new HashMap<>();
+        String[] words = text.toLowerCase().split("\\W+");
+        for (String w : words) {
+            map.compute(w, (k, v) -> v == null ? 1 : v + 1);
+        }
+
+        Map<String, Long> resultMap = map.entrySet()
+                .stream()
+                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .limit(3).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        assertText(resultMap);
+    }
+
+    @Test
+    public void arraysStream() {//~ 67ms
         String[] words = text.toLowerCase().split("\\W+");
         Map<String, Long> result = Arrays.stream(words)
                 .collect(Collectors.groupingBy(x -> x, Collectors.counting()));
@@ -75,15 +85,13 @@ public class WordFrequencyFromTextTest {
         assertText(result);
     }
 
-
     @Test
-    public void arraysStreamRU() throws Exception{
-        System.out.println(Paths.get(".").toAbsolutePath());
-//        byte[] encoded = Files.readAllBytes(Paths.get("texts/tut.by.txt"));
-//        System.out.println(new String(encoded, StandardCharsets.UTF_8));
-        String s = FileUtils.readFileToString(new File("src/test/tut.by.txt"));
+    public void WordsFrequency() throws Exception{
+        String s = FileUtils.readFileToString(new File("src/test/en/medium_test_EN.txt"));
 
-        System.out.println(s);
+        Map<String, Long> x = WordUtils.computeWordsFrequencyOrdered(s);
+
+        assertEquals(67, x.get("code").longValue()); // "code-sharing" is a word
     }
 
 }

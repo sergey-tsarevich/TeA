@@ -2,6 +2,7 @@ package org.tea;
 
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Before;
@@ -48,6 +49,14 @@ public class AnEngineTest {
 
 	@Test
 	public void singleAnnotationCaseSensitive() throws UIMAException {
+		JCas jcas = runComponent("An annotation will be created for New York, although paris will be ignored.", true);
+		assert (select(jcas, Place.class).size() == 1);
+	}
+
+	@Test
+	public void singleAnnotationCaseSensitive1() throws UIMAException {
+//		JCasUtil.toText()
+
 		JCas jcas = runComponent("An annotation will be created for New York, although paris will be ignored.", true);
 		assert (select(jcas, Place.class).size() == 1);
 	}
