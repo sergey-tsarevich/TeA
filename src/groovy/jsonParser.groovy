@@ -1,4 +1,3 @@
-package org.tea.groovy
 // https://groovy-lang.org/json.html
 import groovy.json.JsonSlurper
 

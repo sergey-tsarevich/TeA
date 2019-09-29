@@ -17,6 +17,6 @@ duplicate code algorithm
 
 
 #Online tools
-http://sporkforge.com/text/word_count.php
-https://www.online-utility.org/text/analyzer.jsp
-https://prowritingaid.com/en/Analysis/WebEditor/Go?redirectToDocs=true#_=_
+http://sporkforge.com/text/word_count.php => N/A
+https://www.online-utility.org/text/analyzer.jsp        7/10
+https://prowritingaid.com/en/Analysis/WebEditor/Go?redirectToDocs=true#_=_      9/10

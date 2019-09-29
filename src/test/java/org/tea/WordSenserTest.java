@@ -14,7 +14,7 @@ public class WordSenserTest {
 
     @Test
     public void testFilterSmallText() throws Exception {
-        String s = FileUtils.readFileToString(new File("src/test/en/small_test_EN.txt"));
+        String s = FileUtils.readFileToString(new File("src/test/en/Small_geeks.txt"));
         Map<String, Long> stat = WordUtils.computeWordsFrequencyOrdered(s);
 
         WordSenser.inFewWords(stat);
@@ -27,7 +27,7 @@ public class WordSenserTest {
 
     @Test
     public void testFilterMediumText() throws Exception {
-        String s = FileUtils.readFileToString(new File("src/test/en/medium_test_EN.txt"));
+        String s = FileUtils.readFileToString(new File("src/test/en/Large_oop.txt"));
         Map<String, Long> stat = WordUtils.computeWordsFrequencyOrdered(s);
 
         WordSenser.inFewWords(stat);
@@ -39,7 +39,7 @@ public class WordSenserTest {
 
     @Test
     public void testFilterMedium2Text() throws Exception {
-        String s = FileUtils.readFileToString(new File("src/test/en/most-parents-never-check-their-children-devices.txt"));
+        String s = FileUtils.readFileToString(new File("src/test/en/Medium_parents.txt"));
         Map<String, Long> stat = WordUtils.computeWordsFrequencyOrdered(s);
 
         WordSenser.inFewWords(stat);
@@ -51,11 +51,10 @@ public class WordSenserTest {
 
     @Test
     public void testFilterDebug() throws Exception {
-//        String s = FileUtils.readFileToString(new File("src/test/en/small_test_EN.txt"));
-        String s = FileUtils.readFileToString(new File("src/test/en/film_chats.txt"));
-//        String s = FileUtils.readFileToString(new File("src/test/en/medium_test_EN.txt"));
-//        String s = FileUtils.readFileToString(new File("src/test/en/tumblr.txt"));
-//        String s = FileUtils.readFileToString(new File("src/test/en/most-parents-never-check-their-children-devices.txt"));
+//        String s = FileUtils.readFileToString(new File("src/test/en/Small_geeks.txt"));
+//        String s = FileUtils.readFileToString(new File("src/test/en/Medium_parents.txt"));
+//        String s = FileUtils.readFileToString(new File("src/test/en/Large_oop.txt"));
+        String s = FileUtils.readFileToString(new File("src/test/en/XLarge_films.txt"));
         Map<String, Long> stat = WordUtils.computeWordsFrequencyOrdered(s);
 
         WordSenser.inFewWords(stat);

@@ -14,16 +14,13 @@ import java.util.stream.Collectors;
 
 import static junit.framework.TestCase.assertEquals;
 
-/**
- * Sample tests for the example component. Remove these and add new tests.
- */
 public class WordFrequencyFromTextTest {
 
     private String text = "";
 
     @Before
     public void setUp() throws Exception {
-        text = FileUtils.readFileToString(new File("src/test/en/small_test_EN.txt"));
+        text = FileUtils.readFileToString(new File("src/test/en/Small_geeks.txt"));
     }
 
     @Test
@@ -87,7 +84,7 @@ public class WordFrequencyFromTextTest {
 
     @Test
     public void WordsFrequency() throws Exception{
-        String s = FileUtils.readFileToString(new File("src/test/en/medium_test_EN.txt"));
+        String s = FileUtils.readFileToString(new File("src/test/en/Large_oop.txt"));
 
         Map<String, Long> x = WordUtils.computeWordsFrequencyOrdered(s);
 

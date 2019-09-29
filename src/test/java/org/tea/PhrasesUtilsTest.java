@@ -21,12 +21,33 @@ public class PhrasesUtilsTest {
 
 
     @Test
+    public void smallText() throws IOException {
+        String s = FileUtils.readFileToString(new File("src/test/en/Small_geeks.txt"));
+        LinkedHashMap<String, Integer> stat = PhrasesUtils.computePhrasesFrequencyOrdered(s);
+
+        assertEquals(2, stat.get("your article").intValue());
+        assertEquals(2, stat.get("geeks for geeks").intValue());
+        assertEquals(2, stat.get("to contribute").intValue());
+        assertEquals(3, stat.size());
+    }
+
+    @Test
+    // todo:
+    public void mediumTextLongestAndFrequentPhrase() throws IOException {
+        String s = FileUtils.readFileToString(new File("src/test/en/Medium_parents.txt"));
+        LinkedHashMap<String, Integer> stat = PhrasesUtils.computePhrasesFrequencyOrdered(s);
+        assertEquals(2, stat.get("three out of five parents have never checked their child's devices zdnet").intValue());
+        assertEquals(2, stat.get("only 14% of parents admitted to regularly checking their child's devices").intValue());
+        assertEquals(4, stat.get("when it comes to").intValue());
+        assertEquals(6, stat.get("their child's devices").intValue());
+        assertEquals(8, stat.get("social media").intValue());
+    }
+
+    @Test
     public void test() throws IOException {
-        String s = FileUtils.readFileToString(new File("src/test/en/small_test_EN.txt"));
-//        String s = FileUtils.readFileToString(new File("src/test/en/film_chats.txt")); // takes 32s!
-//        String s = FileUtils.readFileToString(new File("src/test/en/medium_test_EN.txt"));
-//        String s = FileUtils.readFileToString(new File("src/test/en/tumblr.txt"));
-//        String s = FileUtils.readFileToString(new File("src/test/en/most-parents-never-check-their-children-devices.txt"));
+        String s = FileUtils.readFileToString(new File("src/test/en/Medium_parents.txt"));
+//        String s = FileUtils.readFileToString(new File("src/test/en/Large_oop.txt"));
+//        String s = FileUtils.readFileToString(new File("src/test/en/XLarge_films.txt")); // takes 32s!
 
 
         LinkedHashMap<String, Integer> stat = PhrasesUtils.computePhrasesFrequencyOrdered(s);
