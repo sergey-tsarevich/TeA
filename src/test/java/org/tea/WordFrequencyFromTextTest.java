@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.tea.en.WordUtils;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,7 +21,7 @@ public class WordFrequencyFromTextTest {
 
     @Before
     public void setUp() throws Exception {
-        text = FileUtils.readFileToString(new File("src/test/en/Small_geeks.txt"));
+        text = FileUtils.readFileToString(new File("src/test/en/Small_geeks.txt"), StandardCharsets.UTF_8);
     }
 
     @Test
@@ -84,7 +85,7 @@ public class WordFrequencyFromTextTest {
 
     @Test
     public void WordsFrequency() throws Exception{
-        String s = FileUtils.readFileToString(new File("src/test/en/Large_oop.txt"));
+        String s = FileUtils.readFileToString(new File("src/test/en/Large_oop.txt"), StandardCharsets.UTF_8);
 
         Map<String, Long> x = WordUtils.computeWordsFrequencyOrdered(s);
 

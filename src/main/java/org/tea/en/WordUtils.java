@@ -1,12 +1,13 @@
 package org.tea.en;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.Collections.reverseOrder;
 import static java.util.Map.Entry.comparingByValue;
+import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Collectors.groupingBy;
 
 public class WordUtils {
 
@@ -19,23 +20,14 @@ public class WordUtils {
     public static Map<String, Long> computeWordsFrequency(String tea) {
         Stream<String> stream = Stream.of(tea.toLowerCase().split(WORD_SPLIT_PATTERN));
 
-        return stream.collect(Collectors.groupingBy(x -> x, Collectors.counting()))
-                .entrySet()
-                .stream()
-                .collect(toMap(
-                        Map.Entry::getKey,
-                        Map.Entry::getValue));
+        return stream.collect(groupingBy(x -> x, counting()));
     }
 
     /**
      * The same as {@link #computeWordsFrequency(String)} but ordered
      */
-    public static Map<String, Long> computeWordsFrequencyOrdered(String tea) {
-        Stream<String> stream = Stream.of(tea.toLowerCase().split(WORD_SPLIT_PATTERN));
-
-        return stream.collect(Collectors.groupingBy(x -> x, Collectors.counting()))
-                .entrySet()
-                .stream()
+    public static LinkedHashMap<String, Long> computeWordsFrequencyOrdered(String tea) {
+        return computeWordsFrequency(tea).entrySet().stream()
                 .sorted(reverseOrder(comparingByValue()))
                 .collect(toMap(
                         Map.Entry::getKey,

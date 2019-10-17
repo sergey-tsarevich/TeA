@@ -1,6 +1,7 @@
 package org.tea;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.tea.en.PhrasesUtils;
 import org.tea.en.WordSenser;
@@ -8,6 +9,7 @@ import org.tea.en.WordUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -22,7 +24,7 @@ public class PhrasesUtilsTest {
 
     @Test
     public void smallText() throws IOException {
-        String s = FileUtils.readFileToString(new File("src/test/en/Small_geeks.txt"));
+        String s = FileUtils.readFileToString(new File("src/test/en/Small_geeks.txt"), StandardCharsets.UTF_8);
         LinkedHashMap<String, Integer> stat = PhrasesUtils.computePhrasesFrequencyOrdered(s);
 
         assertEquals(2, stat.get("your article").intValue());
@@ -33,8 +35,9 @@ public class PhrasesUtilsTest {
 
     @Test
     // todo:
+    @Ignore
     public void mediumTextLongestAndFrequentPhrase() throws IOException {
-        String s = FileUtils.readFileToString(new File("src/test/en/Medium_parents.txt"));
+        String s = FileUtils.readFileToString(new File("src/test/en/Medium_parents.txt"), StandardCharsets.UTF_8);
         LinkedHashMap<String, Integer> stat = PhrasesUtils.computePhrasesFrequencyOrdered(s);
         assertEquals(2, stat.get("three out of five parents have never checked their child's devices zdnet").intValue());
         assertEquals(2, stat.get("only 14% of parents admitted to regularly checking their child's devices").intValue());
@@ -45,9 +48,9 @@ public class PhrasesUtilsTest {
 
     @Test
     public void test() throws IOException {
-        String s = FileUtils.readFileToString(new File("src/test/en/Medium_parents.txt"));
-//        String s = FileUtils.readFileToString(new File("src/test/en/Large_oop.txt"));
-//        String s = FileUtils.readFileToString(new File("src/test/en/XLarge_films.txt")); // takes 32s!
+        String s = FileUtils.readFileToString(new File("src/test/en/Medium_parents.txt"), StandardCharsets.UTF_8);
+//        String s = FileUtils.readFileToString(new File("src/test/en/Large_oop.txt"), StandardCharsets.UTF_8);
+//        String s = FileUtils.readFileToString(new File("src/test/en/XLarge_films.txt"), StandardCharsets.UTF_8); // takes 32s!
 
 
         LinkedHashMap<String, Integer> stat = PhrasesUtils.computePhrasesFrequencyOrdered(s);

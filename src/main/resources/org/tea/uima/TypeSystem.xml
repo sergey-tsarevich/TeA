@@ -1,0 +1,9 @@
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <name>TypeSystem</name>
+    <description/>
+    <version>1.0</version>
+    <vendor/>
+    <imports>
+        <import name="org.tea.uima.types.RepeatedWord"/>
+    </imports>
+</typeSystemDescription>

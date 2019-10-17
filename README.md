@@ -7,15 +7,13 @@ The more frequent is word the more weight of this word. (For example https://www
 (For example https://www.geeksforgeeks.org/word-break-problem-dp-32/  )
 4. Create new Regex Annotators and add it to configuration.
   
-mvn archetype:generate 2442
-
 ### todos:
 - search the most heavy(by sum of weight of separate words) phrases
     -+ https://medium.com/@codingfreak/recursion-practice-problems-d8c6b4fbb04e - one-word algorithms(
     -UIMA
 duplicate code algorithm
 
-
+News.isNegative?
 #Online tools
 http://sporkforge.com/text/word_count.php => N/A
 https://www.online-utility.org/text/analyzer.jsp        7/10

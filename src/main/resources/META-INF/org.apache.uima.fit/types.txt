@@ -1,1 +1,1 @@
-classpath*:org/u_compare/U_compareTypeSystem.xml
+classpath*:org/tea/uima/types/RepeatedWord.xml

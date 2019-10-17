@@ -1,20 +1,16 @@
 package org.tea;
 
 
-import org.apache.uima.UIMAException;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CollectionReaderDescription;
+import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
-import org.apache.uima.fit.factory.CollectionReaderFactory;
-import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.u_compare.shared.syntactic.Token;
+import org.apache.uima.util.ProcessTrace;
+import org.tea.uima.types.RepeatedWord;
 
-import static java.util.stream.IntStream.iterate;
+import java.util.Collection;
+
 import static org.apache.uima.fit.factory.JCasFactory.createJCas;
-import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 public class SimpleEngine {
 
@@ -26,14 +22,13 @@ public class SimpleEngine {
             "geeksforgeeks org See your article appearing on the Geeks for Geeks main page and help \n" +
             "thousands of other Geeks";
 
-    public static void main(String[] args) throws UIMAException {
+    public static void main(String[] args) throws Exception {
         // todo: choose from WordFrequencyFromTextTest!
 
         JCas jCas = createJCas();
+        jCas.setDocumentText(text);
 
-        jCas.setDocumentText("some text");
 /*
-
         runPipeline(jCas,
                 createEngineDescription(MyTokenizer.class),
                 createEngineDescription(MyTagger.class));
@@ -42,11 +37,17 @@ public class SimpleEngine {
             System.out.println(token.getTag());
         }
 */
+        AnalysisEngine analysisEngine = AnalysisEngineFactory.createEngine(
+                RepeatedWordAnnotator.class,
+                RepeatedWordAnnotator.PARAM_STRING, "uimaFIT");
 
+        ProcessTrace process = analysisEngine.process(jCas);
+        System.out.println("Analysis duration in ms: " + process.getEvent(RepeatedWordAnnotator.class.getName(), "Analysis").getDuration());
 
-
-
-
+        Collection<RepeatedWord> select = select(jCas, RepeatedWord.class);
+        for (RepeatedWord repeatedWord : select) {
+            System.out.println(repeatedWord.getCoveredText());
+        }
 
     }
 }

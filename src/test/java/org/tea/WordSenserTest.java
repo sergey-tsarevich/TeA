@@ -6,7 +6,11 @@ import org.tea.en.WordSenser;
 import org.tea.en.WordUtils;
 
 import java.io.File;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -14,8 +18,8 @@ public class WordSenserTest {
 
     @Test
     public void testFilterSmallText() throws Exception {
-        String s = FileUtils.readFileToString(new File("src/test/en/Small_geeks.txt"));
-        Map<String, Long> stat = WordUtils.computeWordsFrequencyOrdered(s);
+        String s = FileUtils.readFileToString(new File("src/test/en/Small_geeks.txt"), StandardCharsets.UTF_8);
+        LinkedHashMap<String, Long> stat = WordUtils.computeWordsFrequencyOrdered(s);
 
         WordSenser.inFewWords(stat);
 
@@ -27,8 +31,8 @@ public class WordSenserTest {
 
     @Test
     public void testFilterMediumText() throws Exception {
-        String s = FileUtils.readFileToString(new File("src/test/en/Large_oop.txt"));
-        Map<String, Long> stat = WordUtils.computeWordsFrequencyOrdered(s);
+        String s = FileUtils.readFileToString(new File("src/test/en/Large_oop.txt"), StandardCharsets.UTF_8);
+        LinkedHashMap<String, Long> stat = WordUtils.computeWordsFrequencyOrdered(s);
 
         WordSenser.inFewWords(stat);
 
@@ -39,8 +43,8 @@ public class WordSenserTest {
 
     @Test
     public void testFilterMedium2Text() throws Exception {
-        String s = FileUtils.readFileToString(new File("src/test/en/Medium_parents.txt"));
-        Map<String, Long> stat = WordUtils.computeWordsFrequencyOrdered(s);
+        String s = FileUtils.readFileToString(new File("src/test/en/Medium_parents.txt"), StandardCharsets.UTF_8);
+        LinkedHashMap<String, Long> stat = WordUtils.computeWordsFrequencyOrdered(s);
 
         WordSenser.inFewWords(stat);
 
@@ -51,11 +55,11 @@ public class WordSenserTest {
 
     @Test
     public void testFilterDebug() throws Exception {
-//        String s = FileUtils.readFileToString(new File("src/test/en/Small_geeks.txt"));
-//        String s = FileUtils.readFileToString(new File("src/test/en/Medium_parents.txt"));
-//        String s = FileUtils.readFileToString(new File("src/test/en/Large_oop.txt"));
-        String s = FileUtils.readFileToString(new File("src/test/en/XLarge_films.txt"));
-        Map<String, Long> stat = WordUtils.computeWordsFrequencyOrdered(s);
+//        String s = FileUtils.readFileToString(new File("src/test/en/Small_geeks.txt"), StandardCharsets.UTF_8);
+//        String s = FileUtils.readFileToString(new File("src/test/en/Medium_parents.txt"), StandardCharsets.UTF_8);
+//        String s = FileUtils.readFileToString(new File("src/test/en/Large_oop.txt"), StandardCharsets.UTF_8);
+        String s = FileUtils.readFileToString(new File("src/test/en/XLarge_films.txt"), StandardCharsets.UTF_8);
+        LinkedHashMap<String, Long> stat = WordUtils.computeWordsFrequencyOrdered(s);
 
         WordSenser.inFewWords(stat);
 

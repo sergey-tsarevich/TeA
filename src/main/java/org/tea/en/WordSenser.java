@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /*
     To make presentation of the shortest sense of the text
@@ -22,14 +24,14 @@ public class WordSenser {
     private WordSenser() {
     }
 
-    public static void inFewWords(Map<String, Long> wordsStat) throws IOException {
+    public static void inFewWords(LinkedHashMap<String, Long> wordsStat) throws IOException {
         filter(wordsStat);
         removeCommonWords(wordsStat);
         limit(wordsStat);
     }
 
     // filter top 20% of words with more than 1 occurrence
-    public static void filter(Map<String, Long> wordsStat) {
+    public static void filter(LinkedHashMap<String, Long> wordsStat) {
         Iterator<Map.Entry<String, Long>> iterator = wordsStat.entrySet().iterator();
         int idx = 0;
         while (iterator.hasNext()) {
