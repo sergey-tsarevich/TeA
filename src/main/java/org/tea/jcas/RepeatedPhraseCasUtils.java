@@ -44,15 +44,7 @@ public class RepeatedPhraseCasUtils {
      * todo: review!
      */
     public static Map<String, List<Phrase>> computePhrasesFrequency(String tea, PhraseGrouping grouping) {
-        switch   (grouping){
-            case CASE_INSENSITIVE:
-                tea = tea.toLowerCase();
-                break;
-            case FIRST_SENTENCE_LETTER_LOWERCASE:
-                // todo:
-            case CASE_SENSITIVE:
-        }
-
+        tea = prepareText(tea, grouping);
         JCas jCas = null;
         try {
             jCas = createJCas();
@@ -111,8 +103,20 @@ public class RepeatedPhraseCasUtils {
                 collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
+    private static String prepareText(String tea, PhraseGrouping grouping) {
+        switch   (grouping){
+            case CASE_INSENSITIVE:
+                tea = tea.toLowerCase();
+                break;
+            case FIRST_SENTENCE_LETTER_LOWERCASE:
+                tea = tea.replaceAll("\\.\\s+([A-Z])", " $1");
+            case CASE_SENSITIVE:
+        }
+
+        return tea.replaceAll("(\\s)\\s+", "$1");
+    }
+
     private static List<Phrase> makePhrases(Collection<RepeatedWord> select) {
-        // todo: we hope that space char length is 1!
         List<Phrase> phrases = new ArrayList<>();
         Phrase newPhrase = new Phrase();
         RepeatedWord prev = null;
