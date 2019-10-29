@@ -1,26 +1,28 @@
 package org.tea;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.similarity.FuzzyScore;
+import org.apache.commons.text.similarity.JaccardSimilarity;
+import org.apache.commons.text.similarity.JaroWinklerDistance;
+import org.apache.commons.text.similarity.JaroWinklerSimilarity;
+import org.apache.commons.text.similarity.LongestCommonSubsequence;
+import org.apache.commons.text.similarity.LongestCommonSubsequenceDistance;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.tea.en.PhrasesUtils;
-import org.tea.en.WordSenser;
-import org.tea.en.WordUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.Locale;
 
 import static junit.framework.TestCase.assertEquals;
 
 public class PhrasesUtilsTest {
-// regex: (?s)([A-Z]+)\s+.*?\1
-//    (?s)\b(\w+(?:\s*\w*))\s+.*?\1
-//        \b(\w+(?:\s*\w*))\s+\1\b
-//RegEx: max 2-words the nearest phrases
-
 
     @Test
     public void smallText() throws IOException {
@@ -31,19 +33,6 @@ public class PhrasesUtilsTest {
         assertEquals(2, stat.get("geeks for geeks").intValue());
         assertEquals(2, stat.get("to contribute").intValue());
         assertEquals(3, stat.size());
-    }
-
-    @Test
-    // todo:
-    @Ignore
-    public void mediumTextLongestAndFrequentPhrase() throws IOException {
-        String s = FileUtils.readFileToString(new File("src/test/en/Medium_parents.txt"), StandardCharsets.UTF_8);
-        LinkedHashMap<String, Integer> stat = PhrasesUtils.computePhrasesFrequencyOrdered(s);
-        assertEquals(2, stat.get("three out of five parents have never checked their child's devices zdnet").intValue());
-        assertEquals(2, stat.get("only 14% of parents admitted to regularly checking their child's devices").intValue());
-        assertEquals(4, stat.get("when it comes to").intValue());
-        assertEquals(6, stat.get("their child's devices").intValue());
-        assertEquals(8, stat.get("social media").intValue());
     }
 
     @Test

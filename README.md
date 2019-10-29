@@ -8,9 +8,6 @@ The more frequent is word the more weight of this word. (For example https://www
 4. Create new Regex Annotators and add it to configuration.
   
 ### todos:
-- search the most heavy(by sum of weight of separate words) phrases
-    -+ https://medium.com/@codingfreak/recursion-practice-problems-d8c6b4fbb04e - one-word algorithms(
-    -UIMA
 duplicate code algorithm
 
 News.isNegative?
