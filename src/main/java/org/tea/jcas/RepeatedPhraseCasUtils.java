@@ -99,7 +99,7 @@ public class RepeatedPhraseCasUtils {
         }
 
         return phrasesStat.entrySet().stream().
-                filter(entry -> entry.getValue().size() > 1 && entry.getValue().get(0).getPhraseWords().size() > 1).
+//                filter(entry -> entry.getValue().size() > 1 && entry.getValue().get(0).getPhraseWords().size() > 1).
                 collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
@@ -109,7 +109,7 @@ public class RepeatedPhraseCasUtils {
                 tea = tea.toLowerCase();
                 break;
             case FIRST_SENTENCE_LETTER_LOWERCASE:
-                tea = tea.replaceAll("\\.\\s+([A-Z])", " $1");
+                tea = tea.replaceAll("\\.\\s+([A-Z])", "\\. $1".toLowerCase());
             case CASE_SENSITIVE:
         }
 
@@ -174,8 +174,10 @@ public class RepeatedPhraseCasUtils {
         int phraseEndIdx = comIdx + lcs.length();
         Phrase repeatedPhrase = new Phrase();
         for (RepeatedWord phraseWord : key.getPhraseWords()) {
-            if (phraseBeginIdx >= comIdx && phraseBeginIdx <= phraseEndIdx) {
+            if (phraseBeginIdx >= comIdx && phraseBeginIdx < phraseEndIdx) {
                 repeatedPhrase.addWord(phraseWord);
+            } else { // todo: keep the rest and if size>=2 recalc! links
+
             }
             phraseBeginIdx += phraseWord.getCoveredText().length() + 1;
         }

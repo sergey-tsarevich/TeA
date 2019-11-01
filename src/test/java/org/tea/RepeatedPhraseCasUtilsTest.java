@@ -39,9 +39,9 @@ public class RepeatedPhraseCasUtilsTest {
     public void mediumTextLongestAndFrequentPhrase() throws IOException {
         String s = FileUtils.readFileToString(new File("src/test/en/Medium_parents.txt"), StandardCharsets.UTF_8);
         Map<String, List<Phrase>> stat = RepeatedPhraseCasUtils.computePhrasesFrequency(s, PhraseGrouping.CASE_INSENSITIVE);
-//        assertEquals(2, stat.get("three out of five parents have never checked their child's devices zdnet").size());
+        assertEquals(2, stat.get(". three out of five parents have never checked their child's devices zdnet rs components").size());
         assertEquals(2, stat.get("only 14% of parents admitted to regularly checking their child's devices").size());
-//        assertEquals(4, stat.get("when it comes to").size());
+        assertEquals(4, stat.get("when it comes to").size());
         assertEquals(6, stat.get("their child's devices").size());
 //        assertEquals(8, stat.get("social media").size());
     }
