@@ -12,7 +12,7 @@
         <!-- TODO: not compatible with Java7 -->
         <!--		<uima.version>2.10.3</uima.version>-->
         <!--		<uima.fit.version>2.4.0</uima.fit.version>-->
-        <uima.version>3.1.0</uima.version>
+        <uima.version>3.3.1</uima.version>
         <uima.fit.version>3.0.0</uima.fit.version>
         <uima.descriptor>desc/org/u_compare/U_compareTypeSystem.xml</uima.descriptor>
         <junit.version>4.13.1</junit.version>
